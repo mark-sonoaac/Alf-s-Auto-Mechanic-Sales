@@ -15,7 +15,7 @@ Contact Full contact info (phone, email, hours, social links) and a message form
 
 Important Note — Frontend Only
 
-This website is currently **frontend only**. That means:
+This website is currently frontend only. That means:
 All pages and content display correctly in the browser
 Forms do not send data anywhere yet** — when a customer submits a contact form, books a repair, or submits an inquiry, it shows a confirmation message on screen but no email or notification is sent
 The car inventory and repair records are built into the site for display purposes
