@@ -53,20 +53,16 @@ export default function CarDetail() {
   return (
     <>
       <div className="car-detail">
-        {/* Top bar */}
-        <div className="car-detail-topbar">
-          <button type="button" className="car-detail-back" onClick={() => navigate('/cars-for-sale')}>
-            ‹ Back
-          </button>
-          <span className="car-detail-topbar-title">{car.make} {car.model}</span>
-        </div>
-
         {/* Gallery */}
         <div
           className="car-detail-gallery"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
+          {/* Floating back button */}
+          <button type="button" className="car-detail-back" onClick={() => navigate('/cars-for-sale')}>
+            ‹ Back
+          </button>
           <img
             key={imgIndex}
             src={images[imgIndex]}
