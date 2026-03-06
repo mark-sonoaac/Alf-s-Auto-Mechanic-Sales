@@ -861,9 +861,7 @@ body {
 .car-detail-gallery {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
   background: #111;
-  overflow: hidden;
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
@@ -876,9 +874,10 @@ body {
 
 .car-detail-gallery-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  max-height: 85vh;
+  object-fit: contain;
   animation: gallery-fade 0.28s ease;
 }
 
@@ -1273,9 +1272,8 @@ body {
 
 /* Detail page — tablet and up */
 @media (min-width: 768px) {
-  .car-detail-gallery {
-    aspect-ratio: 16 / 9;
-    max-height: 58vh;
+  .car-detail-gallery-img {
+    max-height: 75vh;
   }
 
   .gallery-thumb {
