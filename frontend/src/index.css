@@ -1350,25 +1350,24 @@ body {
   background: #aa0000;
 }
 
-/* Vehicle type cards (horizontal scroll) */
+/* Vehicle type cards (horizontal scroll) — image-based */
 .vtype-card {
   flex: 0 0 auto;
-  width: 148px;
-  background: rgba(0, 0, 0, 0.3);
+  width: 168px;
+  background: rgba(0, 0, 0, 0.35);
   border-radius: 10px;
-  padding: 24px 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
   text-decoration: none;
   scroll-snap-align: start;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: background 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .vtype-card:hover {
-  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Featured vehicles carousel cards */
@@ -1408,5 +1407,86 @@ section div::-webkit-scrollbar {
 @media (min-width: 1024px) {
   .featured-car-card {
     flex: 0 0 340px;
+  }
+}
+
+/* ── Showroom sidebar layout ─────────────────────────────────────────────── */
+
+.cars-layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+/* Left sidebar — hidden on mobile, visible on desktop */
+.cars-sidebar {
+  display: none;
+}
+
+.cars-main {
+  flex: 1;
+  min-width: 0;
+  padding: 28px 0;
+}
+
+/* Mobile: title + filter toggle above grid */
+.cars-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cars-mobile-filters {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 20px 16px;
+  margin: 0 16px 20px;
+}
+
+/* Override grid padding since it's now inside the main column */
+.cars-main .cars-grid {
+  padding: 0 16px 48px;
+  max-width: none;
+  margin: 0;
+}
+
+@media (min-width: 860px) {
+  .cars-sidebar {
+    display: block;
+    width: 240px;
+    flex-shrink: 0;
+    padding: 28px 24px;
+    border-right: 1px solid #1a1a1a;
+    position: sticky;
+    top: 88px;
+    max-height: calc(100vh - 88px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #222 transparent;
+  }
+
+  /* Hide mobile-only elements on desktop */
+  .cars-mobile-header {
+    display: none;
+  }
+
+  .cars-main {
+    padding: 28px 0;
+  }
+
+  .cars-main .cars-grid {
+    padding: 0 24px 48px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .cars-main .cars-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

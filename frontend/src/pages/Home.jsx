@@ -2,14 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { autoShopImages, carInventory, getImageUrl } from '../data/carInventory'
 
-// ── Static data ────────────────────────────────────────────────────────────
+// ── Vehicle types — real images ────────────────────────────────────────────
 const vehicleTypes = [
-  { label: 'City Cars',     icon: '🚗' },
-  { label: 'Sedans',        icon: '🚙' },
-  { label: 'Family SUVs',   icon: '🚐' },
-  { label: 'Pickup Trucks', icon: '🛻' },
-  { label: 'Hatchbacks',    icon: '🚘' },
-  { label: 'Wagons',        icon: '🚌' },
+  { label: 'Coupe',       img: '/images/coupe.webp'       },
+  { label: 'Pickup',      img: '/images/pickup.webp'      },
+  { label: 'Hatchback',   img: '/images/hatchback.webp'   },
+  { label: 'Convertible', img: '/images/convertible.webp' },
+  { label: 'Sedan',       img: '/images/sedan.webp'       },
+  { label: 'SUV',         img: '/images/suv.webp'         },
 ]
 
 const quickActions = [
@@ -57,7 +57,6 @@ const preApprovalCards = [
   },
 ]
 
-// ── Shared inline style snippets ───────────────────────────────────────────
 const selectStyle = {
   flex: '1 1 150px',
   background: '#1a1a1a',
@@ -87,7 +86,6 @@ const arrowBtnStyle = {
   flexShrink: 0,
 }
 
-// ── Component ──────────────────────────────────────────────────────────────
 export default function Home() {
   // Hero image cycling
   const heroImages = useMemo(
@@ -115,13 +113,13 @@ export default function Home() {
   )
   const navigate = useNavigate()
 
-  // Featured vehicles carousel scroll
+  // Featured vehicles carousel
   const carouselRef = useRef(null)
   const scrollCarousel = (dir) => {
     carouselRef.current?.scrollBy({ left: dir * 320, behavior: 'smooth' })
   }
 
-  // About section image
+  // About image
   const aboutImg = useMemo(
     () => getImageUrl(autoShopImages.find((n) => n.includes('autoshops')) || autoShopImages[0]),
     []
@@ -130,7 +128,7 @@ export default function Home() {
   return (
     <div id="home">
 
-      {/* ── HERO ──────────────────────────────────────────────────────────── */}
+      {/* ── HERO — centered ───────────────────────────────────────────────── */}
       <section
         style={{
           position: 'relative',
@@ -141,20 +139,39 @@ export default function Home() {
           backgroundPosition: 'center',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.65)', zIndex: 0 }} />
-        <div style={{ position: 'relative', zIndex: 1, padding: 'clamp(32px,5vw,80px) clamp(18px,6vw,120px)', maxWidth: '680px' }}>
-          <p style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '14px' }}>
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          textAlign: 'center',
+          padding: 'clamp(32px, 5vw, 80px) 20px',
+          width: '100%',
+          maxWidth: '760px',
+        }}>
+          <p style={{
+            color: '#cc0000',
+            fontWeight: 700,
+            fontSize: '0.9rem',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: '16px',
+          }}>
             Find your next ride right here in Newark
           </p>
-          <h1 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.8rem)', fontWeight: 900, color: '#fff', lineHeight: 1.1, marginBottom: '32px', textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}>
+          <h1 style={{
+            fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
+            fontWeight: 900,
+            color: '#fff',
+            lineHeight: 1.1,
+            marginBottom: '36px',
+            textShadow: '0 2px 12px rgba(0,0,0,0.7)',
+          }}>
             Cars You Can<br />Count On
           </h1>
-          <Link
-            to="/cars-for-sale"
-            className="home-hero-cta"
-          >
+          <Link to="/cars-for-sale" className="home-hero-cta">
             → See What&apos;s Available
           </Link>
         </div>
@@ -205,7 +222,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3-COLUMN QUICK ACTIONS ─────────────────────────────────────────── */}
+      {/* ── 3-COLUMN QUICK ACTIONS ────────────────────────────────────────── */}
       <section style={{ background: '#0a0a0a', padding: '60px 20px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '32px' }}>
           {quickActions.map((item) => (
@@ -223,31 +240,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── SHOP BY VEHICLE TYPE ──────────────────────────────────────────── */}
+      {/* ── SHOP BY VEHICLE TYPE — real images ───────────────────────────── */}
       <section style={{ background: '#cc0000', padding: '52px 20px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 900, marginBottom: '28px', lineHeight: 1.2 }}>
-            Shop By <span style={{ fontSize: '1.08em', display: 'inline-block' }}>VEHICLE TYPE</span>
+            Shop By <span style={{ fontSize: '1.08em' }}>VEHICLE TYPE</span>
           </h2>
-          <div
-            style={{
-              display: 'flex',
-              gap: '14px',
-              overflowX: 'auto',
-              scrollSnapType: 'x mandatory',
-              paddingBottom: '6px',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}
-          >
+          <div style={{ display: 'flex', gap: '14px', overflowX: 'auto', scrollSnapType: 'x mandatory', paddingBottom: '6px', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {vehicleTypes.map((vt) => (
-              <Link
-                key={vt.label}
-                to="/cars-for-sale"
-                className="vtype-card"
-              >
-                <span style={{ fontSize: '2.4rem' }}>{vt.icon}</span>
-                <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.85rem', textAlign: 'center', lineHeight: 1.3 }}>{vt.label}</span>
+              <Link key={vt.label} to="/cars-for-sale" className="vtype-card">
+                <img
+                  src={vt.img}
+                  alt={vt.label}
+                  style={{ width: '100%', height: '110px', objectFit: 'cover', display: 'block' }}
+                />
+                <div style={{ padding: '10px 12px', textAlign: 'center' }}>
+                  <span style={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem' }}>{vt.label}</span>
+                </div>
               </Link>
             ))}
           </div>
@@ -262,15 +271,9 @@ export default function Home() {
       {/* ── ABOUT US ──────────────────────────────────────────────────────── */}
       <section id="about" style={{ background: '#0d0d0d', padding: 'clamp(52px, 8vw, 88px) 20px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '48px', alignItems: 'center' }}>
-          {/* Photo */}
           <div style={{ borderRadius: '12px', overflow: 'hidden', maxHeight: '440px' }}>
-            <img
-              src={aboutImg}
-              alt="Alf's Auto shop"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
+            <img src={aboutImg} alt="Alf's Auto shop" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
-          {/* Text */}
           <div>
             <h2 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', marginBottom: '8px', lineHeight: 1.2 }}>
               Alf&apos;s Auto Mechanic &amp; Sales
@@ -296,7 +299,6 @@ export default function Home() {
       {/* ── FEATURED VEHICLES CAROUSEL ────────────────────────────────────── */}
       <section style={{ background: '#0a0a0a', padding: '60px 20px' }}>
         <div style={{ maxWidth: '1160px', margin: '0 auto' }}>
-          {/* Header row */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', flexWrap: 'wrap', gap: '12px' }}>
             <h2 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(1.4rem, 3vw, 2rem)', margin: 0 }}>
               What&apos;s On The Lot
@@ -306,26 +308,13 @@ export default function Home() {
               <button onClick={() => scrollCarousel(1)}  style={arrowBtnStyle} aria-label="Next">›</button>
             </div>
           </div>
-          {/* Scroll strip */}
           <div
             ref={carouselRef}
-            style={{
-              display: 'flex',
-              gap: '16px',
-              overflowX: 'auto',
-              scrollSnapType: 'x mandatory',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              paddingBottom: '4px',
-            }}
+            style={{ display: 'flex', gap: '16px', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: '4px' }}
           >
             {carInventory.map((car) => (
-              <Link
-                key={car.id}
-                to={`/cars/${car.id}`}
-                className="featured-car-card"
-              >
-                <div style={{ width: '100%', aspectRatio: '4/3', overflow: 'hidden', background: '#111', flexShrink: 0 }}>
+              <Link key={car.id} to={`/cars/${car.id}`} className="featured-car-card">
+                <div style={{ width: '100%', aspectRatio: '4/3', overflow: 'hidden', background: '#111' }}>
                   <img
                     src={getImageUrl(car.images[0])}
                     alt={`${car.year} ${car.make} ${car.model}`}
@@ -349,45 +338,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PRE-APPROVAL CTA ──────────────────────────────────────────────── */}
+      {/* ── PRE-APPROVAL CTA — images replace phone mockup ───────────────── */}
       <section style={{ background: '#cc0000', padding: 'clamp(48px, 7vw, 72px) 20px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '48px', alignItems: 'center' }}>
 
-          {/* Phone mockup */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{
-              background: '#1a1a1a',
-              borderRadius: '34px',
-              border: '4px solid #2a2a2a',
-              padding: '12px 10px',
-              width: '210px',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.55)',
-            }}>
-              <div style={{ width: '54px', height: '10px', background: '#2a2a2a', borderRadius: '10px', margin: '0 auto 10px' }} />
-              <div style={{ background: '#0a0a0a', borderRadius: '22px', padding: '24px 16px', minHeight: '230px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-                <div style={{ fontSize: '2.4rem' }}>✅</div>
-                <div style={{ color: '#22c55e', fontWeight: 800, fontSize: '1.05rem', textAlign: 'center', lineHeight: 1.25 }}>
-                  You&apos;re Pre-Approved!
-                </div>
-                <div style={{ color: '#6b7280', fontSize: '0.78rem', textAlign: 'center' }}>
-                  Come pick your ride.
-                </div>
-                <button style={{
-                  width: '100%',
-                  background: '#cc0000',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '9px',
-                  fontWeight: 700,
-                  fontSize: '0.85rem',
-                  cursor: 'pointer',
-                  marginTop: '4px',
-                }}>
-                  Accept
-                </button>
-              </div>
-              <div style={{ width: '64px', height: '5px', background: '#2a2a2a', borderRadius: '10px', margin: '10px auto 0' }} />
+          {/* Images: pre-qualify + carloan */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)' }}>
+              <img
+                src="/images/pre-qualify.png"
+                alt="Get Pre-Qualified"
+                style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+              />
+            </div>
+            <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)' }}>
+              <img
+                src="/images/carloan.jpg"
+                alt="Car Loan"
+                style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+              />
             </div>
           </div>
 
@@ -407,19 +376,7 @@ export default function Home() {
                   <p style={{ color: '#9ca3af', fontSize: '0.85rem', lineHeight: 1.65, flex: 1, margin: 0 }}>{card.text}</p>
                   <Link
                     to="/book-repair"
-                    style={{
-                      display: 'block',
-                      background: '#cc0000',
-                      color: '#fff',
-                      fontWeight: 700,
-                      fontSize: '0.82rem',
-                      padding: '11px',
-                      borderRadius: '8px',
-                      textAlign: 'center',
-                      textDecoration: 'none',
-                      letterSpacing: '0.04em',
-                      marginTop: 'auto',
-                    }}
+                    style={{ display: 'block', background: '#cc0000', color: '#fff', fontWeight: 700, fontSize: '0.82rem', padding: '11px', borderRadius: '8px', textAlign: 'center', textDecoration: 'none', letterSpacing: '0.04em', marginTop: 'auto' }}
                   >
                     {card.cta}
                   </Link>
