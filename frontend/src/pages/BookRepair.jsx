@@ -1,185 +1,182 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+const servicesList = [
+  'Oil Change',
+  'Brake Service',
+  'Tires & Wheels',
+  'Exhaust / Muffler',
+  'Diagnostics',
+  'Air Conditioning',
+  'Transmission',
+  'General Maintenance',
+]
+
+const inputStyle = {
+  width: '100%',
+  background: '#111',
+  border: '1px solid #222',
+  borderRadius: '8px',
+  padding: '12px 14px',
+  color: '#fff',
+  fontSize: '16px',
+  outline: 'none',
+  boxSizing: 'border-box',
+}
+
+const labelStyle = {
+  display: 'block',
+  color: '#9ca3af',
+  fontSize: '0.78rem',
+  fontWeight: 700,
+  letterSpacing: '0.07em',
+  textTransform: 'uppercase',
+  marginBottom: '6px',
+}
+
 export default function BookRepair() {
   const [formData, setFormData] = useState({
-    phone: '',
-    vehicle: '',
-    year: '',
-    services: [],
-    date: '',
-    time: '',
-    notes: ''
+    phone: '', vehicle: '', year: '', services: [], date: '', time: '', notes: '',
   })
-
-  const servicesList = [
-    'Oil Change',
-    'Brake Service',
-    'Tires & Wheels',
-    'Exhaust / Muffler',
-    'Diagnostics',
-    'Air Conditioning',
-    'Transmission',
-    'General Maintenance'
-  ]
+  const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (e) => {
-    const { name, value, type, selectedOptions } = e.target
-    if (name === 'services') {
-      const values = Array.from(selectedOptions).map(o => o.value)
-      setFormData({ ...formData, services: values })
-      return
-    }
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-    setFormData({ ...formData, [name]: value })
+  const toggleService = (s) => {
+    setFormData((prev) => ({
+      ...prev,
+      services: prev.services.includes(s)
+        ? prev.services.filter((x) => x !== s)
+        : [...prev.services, s],
+    }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Appointment request:', formData)
-    alert('Appointment request submitted! We will contact you soon.')
-    setFormData({ phone: '', vehicle: '', year: '', services: [], date: '', time: '', notes: '' })
+    setSubmitted(true)
   }
 
   return (
-    <div className="w-full px-6 pt-24 pb-12">
-      {/* Banner Image */}
-      <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
-        <img src="/images/auto-shops/repair-vehicle.jpg" alt="Vehicle Repair" className="w-full h-64 object-cover" />
-      </div>
+    <div className="book-repair-page" style={{ minHeight: '100vh', padding: '0 0 60px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
 
-      <div className="max-w-7xl mx-auto">
-        <nav className="mb-6">
-          <div className="flex items-center gap-6 text-sm">
-            <Link to="/" className="text-blue-500 font-semibold">Home</Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-300 font-semibold">Repairs & Services</span>
-          </div>
+        {/* Banner image */}
+        <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '28px' }}>
+          <img src="/images/auto-shops/repair-vehicle.jpg" alt="Vehicle Repair" style={{ width: '100%', maxHeight: '260px', objectFit: 'cover', display: 'block' }} />
+        </div>
+
+        {/* Breadcrumb */}
+        <nav style={{ marginBottom: '20px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link to="/" style={{ color: '#cc0000', textDecoration: 'none', fontWeight: 600 }}>Home</Link>
+          <span style={{ color: '#4b5563' }}>/</span>
+          <span style={{ color: '#9ca3af' }}>Book a Repair</span>
         </nav>
 
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-white">Book a Repair</h1>
-          <p className="text-gray-300 mt-2">We offer a wide range of services from oil changes and brake work to exhaust/muffler repair, tires & wheels, AC service, diagnostics and more. Select the services you need from the list.</p>
-        </header>
+        <div style={{ marginBottom: '28px' }}>
+          <h1 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', marginBottom: '8px' }}>Book a Repair</h1>
+          <p style={{ color: '#9ca3af', fontSize: '0.93rem', lineHeight: 1.6, margin: 0 }}>
+            Pick what you need, fill in your info, and we'll reach out to confirm. For urgent stuff — just call us at (973) 981-3578.
+          </p>
+        </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg flex-1">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">Service Request</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', alignItems: 'start' }}>
 
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Vehicle (Make & Model)</label>
-            <input
-              type="text"
-              name="vehicle"
-              placeholder="e.g., Honda Civic"
-              value={formData.vehicle}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">Year</label>
-              <input
-                type="number"
-                name="year"
-                placeholder="Year"
-                value={formData.year}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-700 font-semibold mb-3">Select Services</label>
-              <div className="space-y-2 border border-gray-300 rounded-lg p-4 bg-gray-50">
-                {servicesList.map(s => (
-                  <label key={s} className="flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.services.includes(s)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setFormData({ ...formData, services: [...formData.services, s] })
-                        } else {
-                          setFormData({ ...formData, services: formData.services.filter(svc => svc !== s) })
-                        }
-                      }}
-                      className="w-4 h-4 text-blue-500 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
-                    />
-                    <span className="ml-3 text-gray-700">{s}</span>
-                  </label>
-                ))}
+            {/* Form */}
+            {submitted ? (
+              <div style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: '14px', padding: '48px 24px', textAlign: 'center', gridColumn: '1 / -1' }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>✅</div>
+                <h2 style={{ color: '#fff', fontWeight: 800, fontSize: '1.2rem', marginBottom: '8px' }}>Request received.</h2>
+                <p style={{ color: '#9ca3af', fontSize: '0.9rem', marginBottom: '20px' }}>We'll call to confirm your appointment.</p>
+                <button onClick={() => setSubmitted(false)} style={{ background: '#cc0000', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 24px', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem' }}>
+                  Book Another
+                </button>
               </div>
-            </div>
-          </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: '14px', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+                <h2 style={{ color: '#fff', fontWeight: 800, fontSize: '1.1rem', margin: 0 }}>Service Request</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <input
-              type="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              required
-              className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+                <div>
+                  <label style={labelStyle}>Vehicle (Make & Model)</label>
+                  <input type="text" name="vehicle" placeholder="e.g., Honda Civic" value={formData.vehicle} onChange={handleChange} required style={inputStyle} />
+                </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Additional Notes (optional)</label>
-            <textarea
-              name="notes"
-              placeholder="Describe any issues or concerns"
-              value={formData.notes}
-              onChange={handleChange}
-              rows="4"
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-          </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <label style={labelStyle}>Year</label>
+                    <input type="number" name="year" placeholder="Year" value={formData.year} onChange={handleChange} required style={inputStyle} />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Phone</label>
+                    <input type="tel" name="phone" placeholder="We'll call to confirm" value={formData.phone} onChange={handleChange} required style={inputStyle} />
+                  </div>
+                </div>
 
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2">Phone Number</label>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone (we'll call to confirm)"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+                <div>
+                  <label style={labelStyle}>Select Services</label>
+                  <div style={{ background: '#0a0a0a', border: '1px solid #222', borderRadius: '8px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {servicesList.map((s) => (
+                      <label key={s} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', minHeight: '28px' }}>
+                        <input
+                          type="checkbox"
+                          checked={formData.services.includes(s)}
+                          onChange={() => toggleService(s)}
+                          style={{ width: '18px', height: '18px', accentColor: '#cc0000', cursor: 'pointer', flexShrink: 0 }}
+                        />
+                        <span style={{ color: '#d1d5db', fontSize: '0.9rem' }}>{s}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
 
-          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Request Appointment</button>
-        </form>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <label style={labelStyle}>Date</label>
+                    <input type="date" name="date" value={formData.date} onChange={handleChange} required style={{ ...inputStyle, colorScheme: 'dark' }} />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Time</label>
+                    <input type="time" name="time" value={formData.time} onChange={handleChange} required style={{ ...inputStyle, colorScheme: 'dark' }} />
+                  </div>
+                </div>
 
-        <aside className="lg:w-1/3">
-          <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
-            <h3 className="font-bold text-gray-800 mb-2">Quick Info</h3>
-            <p className="text-gray-700 mb-4">Need a quick quote? Call us at +1 (973) 981-3578.</p>
-            <h4 className="font-semibold mb-2">Services We Offer</h4>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1">
-              <li>Oil Changes & Fluid Service</li>
-              <li>Brake Service & Pads</li>
-              <li>Tires, Wheels & Alignments</li>
-              <li>Exhaust & Muffler Repair</li>
-              <li>Air Conditioning Service</li>
-              <li>Diagnostics & Check Engine</li>
-              <li>Transmission & Drivetrain</li>
-            </ul>
+                <div>
+                  <label style={labelStyle}>Notes (optional)</label>
+                  <textarea name="notes" placeholder="Any details that might help..." value={formData.notes} onChange={handleChange} rows="3" style={{ ...inputStyle, resize: 'vertical' }} />
+                </div>
+
+                <button type="submit" style={{ background: '#cc0000', color: '#fff', fontWeight: 700, fontSize: '1rem', padding: '14px', borderRadius: '8px', border: 'none', cursor: 'pointer', minHeight: '44px' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#aa0000' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = '#cc0000' }}
+                >
+                  Request Appointment
+                </button>
+              </form>
+            )}
+
+            {/* Aside */}
+            <aside style={{ background: '#111', borderLeft: '3px solid #cc0000', borderRadius: '0 12px 12px 0', padding: '24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+              <div>
+                <h3 style={{ color: '#fff', fontWeight: 800, fontSize: '1rem', marginBottom: '6px' }}>Need it faster?</h3>
+                <a href="tel:+19739813578" style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none' }}>
+                  📞 (973) 981-3578
+                </a>
+              </div>
+              <div>
+                <h4 style={{ color: '#9ca3af', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px' }}>What We Do</h4>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {['Oil Changes & Fluids', 'Brake Pads & Rotors', 'Tires, Wheels & Alignment', 'Exhaust & Muffler', 'A/C Service', 'Check Engine & Diagnostics', 'Transmission & Drivetrain'].map((item) => (
+                    <li key={item} style={{ color: '#d1d5db', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ color: '#cc0000', fontWeight: 700 }}>✓</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
+
           </div>
-        </aside>
         </div>
       </div>
     </div>

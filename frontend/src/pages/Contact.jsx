@@ -1,182 +1,146 @@
 import { useState } from 'react'
 
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  })
+const inputStyle = {
+  width: '100%',
+  background: '#111',
+  border: '1px solid #222',
+  borderRadius: '8px',
+  padding: '12px 14px',
+  color: '#fff',
+  fontSize: '16px',
+  outline: 'none',
+  boxSizing: 'border-box',
+}
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+const labelStyle = {
+  display: 'block',
+  color: '#9ca3af',
+  fontSize: '0.82rem',
+  fontWeight: 700,
+  letterSpacing: '0.06em',
+  textTransform: 'uppercase',
+  marginBottom: '6px',
+}
+
+export default function Contact() {
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
+  const [sent, setSent] = useState(false)
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Contact form submitted:', formData)
-    alert('Thank you for reaching out! We will respond within 24 hours.')
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    })
+    setSent(true)
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-24 pb-12">
-      <h1 className="text-4xl font-bold mb-8 text-white">Contact Us</h1>
+    <div className="contact-page" style={{ minHeight: '100vh', padding: '0 0 60px' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 20px 0' }}>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Contact Info */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6 text-white">Get in Touch</h2>
+        <h1 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', marginBottom: '36px' }}>
+          Contact Us
+        </h1>
 
-          <div className="space-y-8">
-            {/* Phone */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
+
+          {/* Info column */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+
             <div>
-              <h3 className="font-bold text-lg mb-2 text-white">📞 Phone</h3>
-              <p className="text-gray-200 text-lg">+1 (973) 981-3578</p>
-              <p className="text-gray-400 text-sm">Available Monday to Friday: 8AM to 6PM, Saturday: 9AM to 4PM</p>
-            </div>
-
-            {/* Email */}
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-white">📧 Email</h3>
-              <p className="text-gray-200 text-lg">alfsautomechanic@gmail.com</p>
-              <p className="text-gray-400 text-sm">We respond within 24 hours</p>
-            </div>
-
-            {/* Social */}
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-white">📱 Social</h3>
-              <a
-                className="text-gray-200 text-lg block hover:text-blue-400"
-                href="https://www.instagram.com/alfsautomechanic"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Instagram: @alfsautomechanic
+              <h3 style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Phone</h3>
+              <a href="tel:+19739813578" style={{ color: '#fff', fontSize: '1.1rem', fontWeight: 700, textDecoration: 'none', display: 'block', marginBottom: '4px' }}>
+                (973) 981-3578
               </a>
-              <a
-                className="text-gray-200 text-lg block hover:text-blue-400"
-                href="https://www.tiktok.com/@alfs.auto.mechani?_r=1&_t=ZP-93rmvbEZOQAs"
-                target="_blank"
-                rel="noreferrer"
+              <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>Mon–Fri 8AM–6PM · Sat 9AM–4PM</p>
+            </div>
+
+            <div>
+              <h3 style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Email</h3>
+              <a href="mailto:alfsautomechanic@gmail.com" style={{ color: '#fff', fontSize: '0.95rem', textDecoration: 'none', display: 'block', marginBottom: '4px', wordBreak: 'break-all' }}>
+                alfsautomechanic@gmail.com
+              </a>
+              <p style={{ color: '#6b7280', fontSize: '0.85rem', margin: 0 }}>We get back to everyone, usually same day</p>
+            </div>
+
+            <div>
+              <h3 style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Location</h3>
+              <p style={{ color: '#fff', fontSize: '0.95rem', margin: '0 0 4px' }}>556 Hawthorne Ave</p>
+              <p style={{ color: '#fff', fontSize: '0.95rem', margin: '0 0 8px' }}>Newark, NJ 07112</p>
+            </div>
+
+            <div>
+              <h3 style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Hours</h3>
+              <p style={{ color: '#d1d5db', fontSize: '0.9rem', margin: '0 0 4px' }}>Mon – Fri: 8:00 AM – 6:00 PM</p>
+              <p style={{ color: '#d1d5db', fontSize: '0.9rem', margin: '0 0 4px' }}>Saturday: 9:00 AM – 4:00 PM</p>
+              <p style={{ color: '#6b7280', fontSize: '0.9rem', margin: 0 }}>Sunday: Closed</p>
+            </div>
+
+            <div>
+              <h3 style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>Follow Us</h3>
+              <a href="https://www.instagram.com/alfsautomechanic" target="_blank" rel="noreferrer"
+                style={{ color: '#d1d5db', fontSize: '0.9rem', display: 'block', marginBottom: '6px', textDecoration: 'none' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#cc0000' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#d1d5db' }}
               >
-                TikTok: @alfs.auto.mechani
+                📸 @alfsautomechanic
+              </a>
+              <a href="https://www.tiktok.com/@alfs.auto.mechani" target="_blank" rel="noreferrer"
+                style={{ color: '#d1d5db', fontSize: '0.9rem', display: 'block', textDecoration: 'none' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#cc0000' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#d1d5db' }}
+              >
+                🎵 @alfs.auto.mechani
               </a>
             </div>
 
-            {/* Location */}
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-white">📍 Location</h3>
-              <p className="text-gray-200">556 Hawthorne Ave</p>
-              <p className="text-gray-200">Newark, NJ 07112</p>
-              <p className="text-gray-400 text-sm mt-2">Located on Hawthorne Ave</p>
-            </div>
-
-            {/* Hours */}
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-white">🕒 Hours of Operation</h3>
-              <div className="text-gray-200 space-y-1">
-                <p>Monday to Friday: 8:00 AM to 6:00 PM</p>
-                <p>Saturday: 9:00 AM to 4:00 PM</p>
-                <p>Sunday: Closed</p>
-              </div>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-white">🔧 Quick Services</h3>
-              <ul className="text-gray-200 space-y-1">
-                <li>✓ Oil changes $30 to $60</li>
-                <li>✓ Tire rotations $40</li>
-                <li>✓ Diagnostics $85</li>
-                <li>✓ Brake pads starting $120</li>
-              </ul>
-            </div>
           </div>
-        </div>
 
-        {/* Contact Form */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6 text-white">Send us a Message</h2>
-          
-          <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg">
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-              />
-            </div>
+          {/* Form column */}
+          <div style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: '14px', padding: '28px 24px' }}>
+            <h2 style={{ color: '#fff', fontWeight: 800, fontSize: '1.2rem', marginBottom: '24px' }}>Send a Message</h2>
 
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-              />
-            </div>
+            {sent ? (
+              <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>✅</div>
+                <p style={{ color: '#fff', fontWeight: 700, fontSize: '1.05rem', marginBottom: '6px' }}>Got it — thanks.</p>
+                <p style={{ color: '#9ca3af', fontSize: '0.9rem' }}>We'll get back to you shortly.</p>
+                <button onClick={() => setSent(false)} style={{ marginTop: '20px', background: 'none', border: '1px solid #333', color: '#9ca3af', borderRadius: '6px', padding: '8px 18px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div>
+                  <label style={labelStyle}>Full Name</label>
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your name" style={inputStyle} />
+                </div>
+                <div>
+                  <label style={labelStyle}>Email</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" style={inputStyle} />
+                </div>
+                <div>
+                  <label style={labelStyle}>Phone</label>
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="(optional)" style={inputStyle} />
+                </div>
+                <div>
+                  <label style={labelStyle}>Subject</label>
+                  <input type="text" name="subject" value={formData.subject} onChange={handleChange} required placeholder="What's this about?" style={inputStyle} />
+                </div>
+                <div>
+                  <label style={labelStyle}>Message</label>
+                  <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" placeholder="Whatever you need to know..." style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }} />
+                </div>
+                <button type="submit" style={{ background: '#cc0000', color: '#fff', fontWeight: 700, fontSize: '0.95rem', padding: '14px', borderRadius: '8px', border: 'none', cursor: 'pointer', minHeight: '44px', transition: 'background 0.2s' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#aa0000' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = '#cc0000' }}
+                >
+                  Send Message
+                </button>
+              </form>
+            )}
+          </div>
 
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">Phone</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-              />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">Subject</label>
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-                placeholder="e.g., Repair Quote, General Question"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-              />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">Message</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows="6"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition"
-            >
-              Send Message
-            </button>
-          </form>
         </div>
       </div>
     </div>

@@ -787,6 +787,11 @@ body {
   padding-top: 88px;
 }
 
+/* ── Contact Page ───────────────────────────────────────────────────────── */
+.contact-page {
+  padding-top: 88px;
+}
+
 /* ── Car photo count badge on card ─────────────────────────────────────── */
 .car-card-img-wrap {
   position: relative;
@@ -1489,4 +1494,57 @@ section div::-webkit-scrollbar {
   .cars-main .cars-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* ── Mobile global fixes ─────────────────────────────────────────────────── */
+
+/* Prevent iOS auto-zoom on form focus (requires font-size ≥ 16px) */
+@media (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Hero CTA: full width pill on small phones */
+  .home-hero-cta {
+    display: block;
+    text-align: center;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* Nav logo: tighten on very small screens */
+  .nav .logo {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100vw - 110px);
+  }
+
+  /* Section headings: pull back slightly */
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  /* Carousel cards: narrower on phones */
+  .featured-car-card {
+    flex: 0 0 260px;
+  }
+
+  /* Vehicle type cards: tighter */
+  .vtype-card {
+    width: 138px;
+  }
+}
+
+/* No horizontal overflow on any screen */
+body, #root {
+  overflow-x: hidden;
 }
