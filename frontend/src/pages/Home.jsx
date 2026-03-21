@@ -134,8 +134,8 @@ export default function Home() {
       <section
         style={{
           position: 'relative',
-          minHeight: 'calc(100vh - 72px)',
-          marginTop: '72px',
+          minHeight: 'calc(100vh - 88px)',
+          marginTop: '88px',
           backgroundImage: heroImages[heroIdx] ? `url(${heroImages[heroIdx]})` : undefined,
           backgroundSize: 'cover',
           backgroundPosition: 'center',

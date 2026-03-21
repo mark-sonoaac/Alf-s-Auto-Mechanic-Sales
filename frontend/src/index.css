@@ -29,7 +29,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 18px 40px;
+  padding: 26px 40px;
   background: #0a0a0a;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   z-index: 200;
@@ -46,7 +46,7 @@ body {
 
 .nav .logo {
   color: #fff;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.01em;
@@ -60,7 +60,7 @@ body {
 .nav .nav-links a {
   color: #fff;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   transition: opacity 0.2s;
 }
@@ -126,8 +126,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: calc(100vh - 72px);
-  margin-top: 72px;
+  min-height: calc(100vh - 88px);
+  margin-top: 88px;
   display: flex;
   align-items: center;
   transition: background-image 0.6s ease;
@@ -366,7 +366,7 @@ body {
 
 /* ── Cars For Sale Page ─────────────────────────────────────────────────── */
 .cars-page {
-  padding-top: 72px;
+  padding-top: 88px;
   min-height: 100vh;
 }
 
@@ -779,12 +779,12 @@ body {
 
 /* ── Services Page ──────────────────────────────────────────────────────── */
 .services-page {
-  padding-top: 72px;
+  padding-top: 88px;
 }
 
 /* ── Book Repair Page ───────────────────────────────────────────────────── */
 .book-repair-page {
-  padding-top: 72px;
+  padding-top: 88px;
 }
 
 /* ── Car photo count badge on card ─────────────────────────────────────── */
@@ -1098,7 +1098,7 @@ body {
 /* Tablet/iPad (768px+) */
 @media (min-width: 768px) {
   .nav {
-    padding: 18px 60px;
+    padding: 26px 60px;
   }
 
   .hero-content {
@@ -1135,11 +1135,11 @@ body {
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
   .nav {
-    padding: 18px 80px;
+    padding: 26px 80px;
   }
 
   .nav .logo {
-    font-size: 1.45rem;
+    font-size: 1.6rem;
   }
 
   .nav .search-box {
@@ -1192,7 +1192,7 @@ body {
     height: 100%;
     max-width: 280px;
     width: 100%;
-    padding-top: 72px;
+    padding-top: 68px;
     row-gap: 0;
     flex-direction: column;
     background: #111;
