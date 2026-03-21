@@ -29,7 +29,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 14px 40px;
+  padding: 42px 40px;
   background: #0a0a0a;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   z-index: 200;
@@ -46,21 +46,21 @@ body {
 
 .nav .logo {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 3.3rem;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.01em;
 }
 
 .nav .nav-links {
-  column-gap: 28px;
+  column-gap: 24px;
   list-style: none;
 }
 
 .nav .nav-links a {
   color: #fff;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   font-weight: 500;
   transition: opacity 0.2s;
 }
@@ -76,7 +76,7 @@ body {
 
 .nav .search-icon {
   color: #fff;
-  font-size: 20px;
+  font-size: 36px;
   cursor: pointer;
 }
 
@@ -126,8 +126,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: calc(100vh - 52px);
-  margin-top: 52px;
+  min-height: calc(100vh - 156px);
+  margin-top: 156px;
   display: flex;
   align-items: center;
   transition: background-image 0.6s ease;
@@ -366,7 +366,7 @@ body {
 
 /* ── Cars For Sale Page ─────────────────────────────────────────────────── */
 .cars-page {
-  padding-top: 52px;
+  padding-top: 156px;
   min-height: 100vh;
 }
 
@@ -779,12 +779,12 @@ body {
 
 /* ── Services Page ──────────────────────────────────────────────────────── */
 .services-page {
-  padding-top: 90px;
+  padding-top: 156px;
 }
 
 /* ── Book Repair Page ───────────────────────────────────────────────────── */
 .book-repair-page {
-  padding-top: 72px;
+  padding-top: 156px;
 }
 
 /* ── Car photo count badge on card ─────────────────────────────────────── */
@@ -1098,7 +1098,7 @@ body {
 /* Tablet/iPad (768px+) */
 @media (min-width: 768px) {
   .nav {
-    padding: 14px 60px;
+    padding: 42px 60px;
   }
 
   .hero-content {
@@ -1135,11 +1135,11 @@ body {
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
   .nav {
-    padding: 14px 80px;
+    padding: 42px 80px;
   }
 
   .nav .logo {
-    font-size: 1.2rem;
+    font-size: 3.6rem;
   }
 
   .nav .search-box {
@@ -1178,11 +1178,11 @@ body {
   }
 
   .nav {
-    padding: 12px 18px;
+    padding: 28px 18px;
   }
 
   .nav .logo {
-    font-size: 0.95rem;
+    font-size: 1.8rem;
   }
 
   .nav .nav-links {
@@ -1192,7 +1192,7 @@ body {
     height: 100%;
     max-width: 260px;
     width: 100%;
-    padding-top: 80px;
+    padding-top: 110px;
     row-gap: 28px;
     flex-direction: column;
     background: #111;
@@ -1207,16 +1207,16 @@ body {
 
   .nav .navOpenBtn {
     color: #fff;
-    font-size: 22px;
+    font-size: 34px;
     cursor: pointer;
   }
 
   .nav .navCloseBtn {
     position: absolute;
-    top: 18px;
+    top: 22px;
     right: 18px;
     color: #fff;
-    font-size: 22px;
+    font-size: 34px;
     cursor: pointer;
   }
 
