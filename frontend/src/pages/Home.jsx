@@ -14,21 +14,21 @@ const vehicleTypes = [
 
 const quickActions = [
   {
-    icon: '🚗',
+    img: '/images/sedan.webp',
     title: 'Browse Our Lot',
     text: "Tell us what you're after and we'll point you in the right direction. We carry a rotating stock of clean, checked-out vehicles across different budgets and styles.",
     linkLabel: 'View Inventory',
     route: '/cars-for-sale',
   },
   {
-    icon: '💳',
+    img: '/images/autosic.png',
     title: 'Get Financed Today',
     text: "Credit not perfect? Doesn't matter — we work with lenders who deal with all kinds of situations. First-timers, rebuilders, or solid scores, we'll find something that fits.",
     linkLabel: 'See Financing Options',
     route: '/book-repair',
   },
   {
-    icon: '🔑',
+    img: '/images/carss.jpg',
     title: 'Book a Test Drive',
     text: "Nothing beats sitting behind the wheel before you decide. Stop by or call ahead and one of our guys will walk you through it, no pressure.",
     linkLabel: 'Set Up a Visit',
@@ -224,17 +224,27 @@ export default function Home() {
 
       {/* ── 3-COLUMN QUICK ACTIONS ────────────────────────────────────────── */}
       <section style={{ background: '#0a0a0a', padding: '60px 20px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '32px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
           {quickActions.map((item) => (
-            <div key={item.title} style={{ borderTop: '3px solid #cc0000', paddingTop: '22px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div style={{ width: '46px', height: '46px', background: '#cc0000', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', flexShrink: 0 }}>
-                {item.icon}
+            <div key={item.title} style={{ background: '#111', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+              {/* Image */}
+              <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', flexShrink: 0 }}>
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.3s' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.04)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)' }}
+                />
               </div>
-              <h3 style={{ color: '#fff', fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>{item.title}</h3>
-              <p style={{ color: '#9ca3af', fontSize: '0.9rem', lineHeight: 1.65, flex: 1, margin: 0 }}>{item.text}</p>
-              <Link to={item.route} style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}>
-                {item.linkLabel} →
-              </Link>
+              {/* Content */}
+              <div style={{ padding: '20px', borderTop: '3px solid #cc0000', display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
+                <h3 style={{ color: '#fff', fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>{item.title}</h3>
+                <p style={{ color: '#9ca3af', fontSize: '0.88rem', lineHeight: 1.65, flex: 1, margin: 0 }}>{item.text}</p>
+                <Link to={item.route} style={{ color: '#cc0000', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}>
+                  {item.linkLabel} →
+                </Link>
+              </div>
             </div>
           ))}
         </div>
@@ -342,21 +352,34 @@ export default function Home() {
       <section style={{ background: '#cc0000', padding: 'clamp(48px, 7vw, 72px) 20px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '48px', alignItems: 'center' }}>
 
-          {/* Images: pre-qualify + carloan */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)' }}>
-              <img
-                src="/images/pre-qualify.png"
-                alt="Get Pre-Qualified"
-                style={{ width: '100%', display: 'block', objectFit: 'cover' }}
-              />
-            </div>
-            <div style={{ borderRadius: '14px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)' }}>
-              <img
-                src="/images/carloan.jpg"
-                alt="Car Loan"
-                style={{ width: '100%', display: 'block', objectFit: 'cover' }}
-              />
+          {/* Phone mockup containing pre-qualify + carloan images */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{
+              background: '#1a1a1a',
+              borderRadius: '40px',
+              border: '5px solid #2a2a2a',
+              padding: '14px 10px',
+              width: '240px',
+              boxShadow: '0 28px 72px rgba(0,0,0,0.6)',
+              flexShrink: 0,
+            }}>
+              {/* Notch */}
+              <div style={{ width: '60px', height: '10px', background: '#2a2a2a', borderRadius: '10px', margin: '0 auto 10px' }} />
+              {/* Screen */}
+              <div style={{ borderRadius: '24px', overflow: 'hidden', background: '#000', display: 'flex', flexDirection: 'column' }}>
+                <img
+                  src="/images/pre-qualify.png"
+                  alt="Get Pre-Qualified"
+                  style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+                />
+                <img
+                  src="/images/carloan.jpg"
+                  alt="Car Loan"
+                  style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+                />
+              </div>
+              {/* Home bar */}
+              <div style={{ width: '70px', height: '5px', background: '#2a2a2a', borderRadius: '10px', margin: '12px auto 0' }} />
             </div>
           </div>
 
