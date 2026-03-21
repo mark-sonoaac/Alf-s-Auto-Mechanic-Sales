@@ -1,25 +1,27 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+const navItems = [
+  { label: 'Home',              sectionId: 'home'    },
+  { label: 'Showroom',          route: '/cars-for-sale' },
+  { label: 'Apply Online',      route: '/book-repair' },
+  { label: 'Get Pre-Qualified', route: '/book-repair' },
+  { label: 'Services',          route: '/services'   },
+  { label: 'About Us',          sectionId: 'about'   },
+  { label: 'Reviews',           sectionId: 'contact' },
+  { label: 'Contact Us',        route: '/contact'    },
+]
+
 export default function Navigation() {
-  const [openNav, setOpenNav] = useState(false)
+  const [openNav,    setOpenNav]    = useState(false)
   const [openSearch, setOpenSearch] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-  const navigate = useNavigate()
-  const location = useLocation()
-
-  const navItems = [
-    { label: 'Home', sectionId: 'home' },
-    { label: 'Services', sectionId: 'services', route: '/services' },
-    { label: 'Inventory', route: '/cars-for-sale' },
-    { label: 'Contact Us', sectionId: 'contact' }
-  ]
+  const navigate  = useNavigate()
+  const location  = useLocation()
 
   const scrollToSection = (sectionId) => {
     const el = document.getElementById(sectionId)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   const handleNavClick = (sectionId, route) => (e) => {
@@ -53,7 +55,7 @@ export default function Navigation() {
       <ul className="nav-links">
         <i className="uil uil-times navCloseBtn" onClick={() => setOpenNav(false)}></i>
         {navItems.map((item) => (
-          <li key={item.sectionId}>
+          <li key={item.label}>
             <a href={item.route || `#${item.sectionId}`} onClick={handleNavClick(item.sectionId, item.route)}>
               {item.label}
             </a>

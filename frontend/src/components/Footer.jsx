@@ -1,37 +1,102 @@
+import { Link } from 'react-router-dom'
+
+const quickLinks = [
+  { label: 'Home',              route: '/'              },
+  { label: 'Showroom',          route: '/cars-for-sale' },
+  { label: 'Apply Online',      route: '/book-repair'   },
+  { label: 'Services',          route: '/services'      },
+  { label: 'About Us',          route: '/'              },
+  { label: 'Contact Us',        route: '/contact'       },
+  { label: 'Reviews',           route: '/'              },
+  { label: 'Privacy Policy',    route: '/'              },
+]
+
+const colHeading = { color: '#fff', fontWeight: 700, fontSize: '0.88rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '18px' }
+const linkStyle  = { color: '#6b7280', textDecoration: 'none', fontSize: '0.88rem', display: 'block', marginBottom: '8px' }
+
 export default function Footer() {
   return (
-    <footer className="bg-black text-gray-400 py-8 mt-12">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer style={{ background: '#0a0a0a', borderTop: '1px solid #1a1a1a', padding: '56px 20px 0' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+
+        {/* 4-column grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '40px', paddingBottom: '48px' }}>
+
+          {/* Get In Touch */}
           <div>
-            <h3 className="text-white font-bold mb-3">Alf&apos;s Auto Mechanic &amp; Sales LLC</h3>
-            <p className="text-sm">Quality vehicles, honest pricing, and trusted service.</p>
+            <p style={colHeading}>Get In Touch</p>
+            <p style={{ ...linkStyle, lineHeight: 1.55, marginBottom: '12px' }}>
+              📍 556 Hawthorne Ave,<br />Newark, NJ 07112
+            </p>
+            <a href="tel:+19739813578" style={linkStyle}>📞 (973) 981-3578</a>
+            <a href="mailto:alfsautomechanic@gmail.com" style={linkStyle}>✉️ alfsautomechanic@gmail.com</a>
           </div>
+
+          {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-3">Services</h4>
-            <ul className="text-sm space-y-2">
-              <li><a href="#" className="hover:text-blue-400">Vehicle Repair</a></li>
-              <li><a href="#" className="hover:text-blue-400">Vehicle Sales</a></li>
-            </ul>
+            <p style={colHeading}>Quick Links</p>
+            {quickLinks.map((item) => (
+              <Link
+                key={item.label}
+                to={item.route}
+                style={linkStyle}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#cc0000' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#6b7280' }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
+
+          {/* Hours */}
           <div>
-            <h4 className="text-white font-bold mb-3">Company</h4>
-            <ul className="text-sm space-y-2">
-              <li><a href="#" className="hover:text-blue-400">About Us</a></li>
-              <li><a href="#" className="hover:text-blue-400">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-blue-400">Terms & Conditions</a></li>
-            </ul>
+            <p style={colHeading}>Hours We&apos;re Open</p>
+            <p style={{ color: '#6b7280', fontSize: '0.88rem', marginBottom: '10px', lineHeight: 1.6 }}>
+              <span style={{ color: '#d1d5db', fontWeight: 600 }}>Mon – Sat:</span><br />
+              9:00 AM – 7:00 PM
+            </p>
+            <p style={{ color: '#6b7280', fontSize: '0.88rem', lineHeight: 1.6 }}>
+              <span style={{ color: '#d1d5db', fontWeight: 600 }}>Sun:</span><br />
+              By Appointment Only
+            </p>
           </div>
+
+          {/* Follow Along */}
           <div>
-            <h4 className="text-white font-bold mb-3">Contact</h4>
-            <p className="text-sm mb-2">📞 +1 (973) 981-3578</p>
-            <p className="text-sm mb-2">📧 alfsautomechanic@gmail.com</p>
-            <p className="text-sm">📍 556 Hawthorne Ave, Newark, NJ 07112</p>
+            <p style={colHeading}>Follow Along</p>
+            <a
+              href="https://www.instagram.com/alfsautomechanic"
+              target="_blank"
+              rel="noreferrer"
+              style={linkStyle}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#cc0000' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#6b7280' }}
+            >
+              📸 Instagram<br />
+              <span style={{ fontSize: '0.82rem' }}>@alfsautomechanic</span>
+            </a>
+            <a
+              href="https://www.tiktok.com/@alfs.auto.mechani"
+              target="_blank"
+              rel="noreferrer"
+              style={{ ...linkStyle, marginTop: '12px' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#cc0000' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#6b7280' }}
+            >
+              🎵 TikTok<br />
+              <span style={{ fontSize: '0.82rem' }}>@alfs.auto.mechanic</span>
+            </a>
           </div>
+
         </div>
-        <div className="border-t border-gray-700 pt-6 text-center text-sm">
-          <p>&copy; 2026 Alf&apos;s Auto Mechanic &amp; Sales LLC. All rights reserved.</p>
+
+        {/* Bottom bar */}
+        <div style={{ borderTop: '1px solid #1a1a1a', padding: '20px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '0.82rem', color: '#4b5563' }}>
+          <span>© 2026 Alf&apos;s Auto Mechanic &amp; Sales LLC</span>
+          <span>|</span>
+          <a href="#" style={{ color: '#4b5563', textDecoration: 'none' }}>Privacy Policy</a>
         </div>
+
       </div>
     </footer>
   )

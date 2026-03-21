@@ -30,8 +30,8 @@ body {
   left: 0;
   width: 100%;
   padding: 14px 40px;
-  background: #1d4ed8;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  background: #0a0a0a;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -100,7 +100,7 @@ body {
   position: absolute;
   top: 50%;
   left: 14px;
-  color: #1d4ed8;
+  color: #cc0000;
   transform: translateY(-50%);
 }
 
@@ -1195,8 +1195,8 @@ body {
     padding-top: 80px;
     row-gap: 28px;
     flex-direction: column;
-    background: #1e3a8a;
-    box-shadow: 4px 0 18px rgba(0, 0, 0, 0.35);
+    background: #111;
+    box-shadow: 4px 0 18px rgba(0, 0, 0, 0.55);
     transition: left 0.35s ease;
     z-index: 300;
   }
@@ -1302,5 +1302,85 @@ body {
 
   .car-detail-price {
     font-size: 2.4rem;
+  }
+}
+
+/* ── Home page components ────────────────────────────────────────────────── */
+
+/* Hero CTA button */
+.home-hero-cta {
+  display: inline-block;
+  background: #cc0000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.home-hero-cta:hover {
+  background: #aa0000;
+}
+
+/* Vehicle type cards (horizontal scroll) */
+.vtype-card {
+  flex: 0 0 auto;
+  width: 148px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  scroll-snap-align: start;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.2s;
+}
+
+.vtype-card:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Featured vehicles carousel cards */
+.featured-car-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  border: 1px solid #222;
+  transition: border-color 0.2s, transform 0.22s;
+  display: block;
+}
+
+.featured-car-card:hover {
+  border-color: #cc0000;
+  transform: translateY(-4px);
+}
+
+.featured-car-card:hover img {
+  transform: scale(1.04);
+}
+
+/* Hide scrollbar on horizontal scroll strips */
+.featured-car-card ~ .featured-car-card,
+section div::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .featured-car-card {
+    flex: 0 0 320px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured-car-card {
+    flex: 0 0 340px;
   }
 }
