@@ -28,11 +28,13 @@ Vite proxies `/api` requests to `http://localhost:5000` (future backend).
 - `/cars/:id` → CarDetail (renders without Header/Footer — full-screen gallery layout)
 - `/book-repair` → BookRepair, `/my-repairs` → MyRepairs, `/contact` → Contact
 
-**Global state/UI:** `ContactModal` lives in `App.jsx` and is toggled via a prop passed down. `ScrollToTop` resets scroll on route change.
+**Global state/UI:** `ContactModal` lives in `App.jsx` and is opened by dispatching a custom `window` event (`window.dispatchEvent(new Event('openContactModal'))`). `ScrollToTop` resets scroll on route change.
 
-**Data:** Car inventory and hero images live in `src/data/carInventory.js` (static arrays — no API). Each car has `id, year, make, model, price, mileage, transmission, fuel, images[]`.
+**Navigation:** Each nav item has either a `route` (React Router navigate) or `sectionId` (smooth-scroll to `<section id="...">` on Home). If on a non-Home page and a `sectionId` is clicked, it navigates to `/` first, then scrolls after a 50ms timeout.
 
-**Styling:** Tailwind CSS + custom CSS in `src/index.css`. Custom Tailwind colors: `primary` (#000), `secondary` (#3B82F6), `danger` (#EF4444), `success` (#10B981). Font is Poppins (Google Fonts, loaded in `index.html`). Icons via Unicons CDN.
+**Data:** Car inventory and hero images live in `src/data/carInventory.js` (static arrays — no API). Each car has `id, year, make, model, price, mileage, transmission, fuel, images[]`. `getImageUrl(name)` prefixes `/images/`. All images are served from `public/images/` (subdirectories: `cars-for-sale/`, `auto-shops/`).
+
+**Styling:** Mix of Tailwind utility classes and inline `style={{}}` objects — inline styles dominate in page components (Home, CarDetail), while `src/index.css` holds all nav, modal, gallery, and card CSS classes. Custom Tailwind colors: `primary` (#000), `secondary` (#3B82F6), `danger` (#EF4444), `success` (#10B981). Font is Poppins (Google Fonts, loaded in `index.html`). Icons via Unicons CDN. Accent color throughout is `#cc0000` (red).
 
 ## Deployment
 
